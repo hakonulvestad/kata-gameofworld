@@ -6,18 +6,23 @@ public class GameOfLife {
 
         for (int x = 0; x < input.length; x++) {
             for (int y = 0; y < input[x].length; y++) {
-                int neighbours = calculateLiveNeighbours(input, x, y);
-                boolean cellAlive = input[x][y];
-                if (neighbours < 2 || neighbours > 3) {
-                    cellAlive=false;
-                } else if (neighbours == 3) {
-                    cellAlive = true;
-                }
+                boolean cellAlive = handleCell(input, x, y);
                 result[x][y] = cellAlive;
             }
         }
 
         return result;
+    }
+
+    private boolean handleCell(boolean[][] input, int x, int y) {
+        int neighbours = calculateLiveNeighbours(input, x, y);
+        boolean cellAlive = input[x][y];
+        if (neighbours < 2 || neighbours > 3) {
+            cellAlive=false;
+        } else if (neighbours == 3) {
+            cellAlive = true;
+        }
+        return cellAlive;
     }
 
     public int calculateLiveNeighbours(boolean[][] input, int x, int y) {
